@@ -1,0 +1,23 @@
+{
+  "name": "smart-parking-lot",
+  "version": "1.0.0",
+  "description": "The goal of the project is to define requirements, architecture and  prototype of an IoT system for Smart Parking to be used to monitor the different parking lots of VP-Dibris.",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LoSalv/smart-parking-lot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LoSalv/smart-parking-lot/issues"
+  },
+  "homepage": "https://github.com/LoSalv/smart-parking-lot#readme"
+}
