@@ -8,6 +8,7 @@
   },
   "devDependencies": {},
   "scripts": {
+    "run": "node app.js",
     "test": "test"
   },
   "repository": {
