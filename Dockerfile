@@ -19,4 +19,4 @@ RUN npm install
 COPY . .
 
 EXPOSE 8124
-CMD [ "node", "app.js" ]
+CMD [ "npm", "run", "start"]

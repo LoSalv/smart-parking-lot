@@ -6,8 +6,10 @@ PORT = 8124
 build:
 		docker build -t $(IMAGE_NAME) .
 
-buildnrun: build
-		docker run -d -p 8124:8124 $(IMAGE_NAME) 
+reload: 
+		docker compose down -v
+		npm run build
+		docker compose up
 
 rm_all: 
 		docker rm $$(docker ps -a -q)

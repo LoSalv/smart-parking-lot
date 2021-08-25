@@ -1,6 +1,6 @@
-const express = require('express');
-const parkingLotRoutes = require('../routes/parklot')
-const gateRoutes = require('../routes/gate')
+import express = require('express');
+import parkingLotRoutes from '../routes/parklot'
+import gateRoutes from '../routes/gate'
 
 const app = express();
 
@@ -14,9 +14,10 @@ app.use(express.urlencoded({
 
 function printReq() {
     return function (req, res, next) {
-        console.log("Request body: " + JSON.stringify(req.body));
-        console.log("Request headers: " + JSON.stringify(req.headers));
-        if (req.query) console.log("Request query: " + JSON.stringify(req.query));
+        console.log('Request ' + req.method + " to " + req.host + "/" + req.path)
+        console.log("Request body: " + JSON.stringify(req.body))
+        console.log("Request headers: " + JSON.stringify(req.headers))
+        if (req.query != "") console.log("Request query: " + JSON.stringify(req.query))
         next()
     }
 }
@@ -31,4 +32,4 @@ app.use('/gate', gateRoutes)
 
 app.use('/parklot', parkingLotRoutes)
 
-module.exports = app;
+export default app
