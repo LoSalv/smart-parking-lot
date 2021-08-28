@@ -11,12 +11,7 @@ reload:
 		npm run build
 		docker compose up
 
-rm_all: 
-		docker rm $$(docker ps -a -q)
-
-stop_all: 
-		docker stop $$(docker ps -a -q)
-
-rm_active_all: stop_all rm_all
-
-redeploy: rm_active_all buildnrun
+clean:
+		docker compose down -v
+		docker stop $(docker ps -a -q)
+		docker rm $(docker ps -a -q)

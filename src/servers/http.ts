@@ -1,8 +1,10 @@
 import express = require('express');
 import parkingLotRoutes from '../routes/parklot'
 import gateRoutes from '../routes/gate'
+import * as cors from 'cors'
 
 const app = express();
+app.use(cors())
 
 // Add the bodyParser to the chain
 // As the bodyParse middleware get information from
