@@ -15,15 +15,18 @@ aedes.on('clientDisconnect', function (client) {
     console.log('Client Disconnected: ' + (client ? client.id : client))
 })
 
+function publish(topic, payload) {
+    aedes.publish({ topic, payload })
+}
+
 // fired when a message is published
 aedes.on('publish', async function (packet, client) {
+    // const payload = JSON.parse(packet.payload.toString())
+    // console.log(packet.topic, ': ', payload)
     if(packet.topic === 'gate') {
-        const payload = JSON.parse(packet.payload.toString())
-        console.log('Gate : ', payload);
-        mqttServer.publish({ topic: 'lala', payload })
+        publish('gate_data', packet.payload.toString());
     } else if(packet.topic === 'parklot') {
-        const payload = JSON.parse(packet.payload.toString())
-        console.log('Parklot : ', payload);
-        mqttServer.publish({ topic: 'eehhh', payload })
+        publish('parklot_data', packet.payload.toString());
     }
 })
+
