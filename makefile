@@ -1,7 +1,6 @@
 USERNAME = lordebasta
 PROJECT_NAME = smart-parking-lot
 IMAGE_NAME = $(USERNAME)/$(PROJECT_NAME)
-PORT = 8124
 
 build:
 		docker build -t $(IMAGE_NAME) .
