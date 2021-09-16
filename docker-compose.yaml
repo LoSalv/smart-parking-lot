@@ -5,6 +5,7 @@ services:
     build: .
     ports:
       - 8124:8124
+      - 1883:1883
     volumes:
       - ./:/usr/src/app
     environment: 
