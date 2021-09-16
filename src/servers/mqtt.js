@@ -20,8 +20,17 @@ aedes.on('publish', async function (packet, client) {
     // console.log(packet.topic, ': ', payload)
     if(packet.topic === 'gate') {
         publish('gate_data', packet.payload.toString());
+        //let datetime
+        //let plate
     } else if(packet.topic === 'parklot') {
         publish('parklot_data', packet.payload.toString());
+        //let parkNumber = packet.payload.number
+        //let isFree = packet.payload.isFree
+        // try {
+        //     db.changeParkingStatus(parkingId, req.body.isFree)
+        // } catch (err) {
+        //     console.error(err)
+        // }
     }
 })
 
