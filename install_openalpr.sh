@@ -10,5 +10,5 @@ make && make install
 
 
 #test
-wget http://plates.openalpr.com/h786poj.jpg -O lp.jpg
-alpr lp.jpg
+# wget http://plates.openalpr.com/h786poj.jpg -O lp.jpg
+# alpr lp.jpg

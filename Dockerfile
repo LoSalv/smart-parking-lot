@@ -4,7 +4,7 @@ FROM node:16
 WORKDIR /usr/src/app
 
 COPY ./install_openalpr.sh ./
-RUN chmod +x install_openalpr.sh && ./install_openalpr.sh
+RUN chmod +x ./install_openalpr.sh && ./install_openalpr.sh
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied

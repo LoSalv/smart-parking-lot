@@ -20,8 +20,11 @@ aedes.on('publish', async function (packet, client) {
     // console.log(packet.topic, ': ', payload)
     if(packet.topic === 'gate') {
         publish('gate_data', packet.payload.toString());
+        //if (packet.payload.plateString) <- per il DEBUG
+        //if (packet.payload.plate) <- per la PROD 
         //let datetime
         //let plate
+        //db.addLog
     } else if(packet.topic === 'parklot') {
         publish('parklot_data', packet.payload.toString());
         //let parkNumber = packet.payload.number
