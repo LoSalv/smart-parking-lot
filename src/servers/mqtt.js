@@ -1,10 +1,5 @@
 const aedes = require('aedes')()
 const mqttServer = require('net').createServer(aedes.handle)
-const mqttPort = 1883
-
-mqttServer.listen(mqttPort, function () {
-  console.log('server started and listening on port ', mqttPort)
-})
 
 // fired when a client connects
 aedes.on('clientConnect', function (client) {
@@ -30,3 +25,4 @@ aedes.on('publish', async function (packet, client) {
     }
 })
 
+module.exports = mqttServer
