@@ -1,7 +1,11 @@
 // docker.js
 import validator from "validator"
 import { promises as fsPromises } from 'fs'
-const exec = require('child_process').exec
+const util = require('util')
+
+const exec = util.promisify(require('child_process').exec)
+
+// const exec = require('child_process').exec
 
 // callback(plate, error)
 export async function getPlate(imagedata:string, country_code:string, pattern_code:string) : Promise<string> {
@@ -13,10 +17,28 @@ export async function getPlate(imagedata:string, country_code:string, pattern_co
     
     let filepath = "plates.jpg"
 
-    await fsPromises.writeFile(filepath, bufferImg);
+    if (country_code != '') {
+        country_code = ' -c ' + country_code
+    }  
+
+    await fsPromises.writeFile(filepath, bufferImg)
+
+    // return new Promise(async (resolve, reject) => {
+    //     try {
+    //         const {stdout, stderr} = await exec(`alpr -c 'eu'${pattern_code} -j ${filepath}`)
+    //         console.log(stdout)
+    //         if (stdout.results === []) {
+    //             reject('No plates.')
+    //         }
+    //         console.log('plate: ', stdout.results[0].plate)
+    //         resolve(stdout.results[0].plate)
+    //     } catch(e) {
+    //         reject(e)
+    //     }
+    // })
 
     return new Promise((resolve, reject) => {
-        exec(`alpr -c ${country_code} ${pattern_code} -j ${filepath}`, async (error, stdout, stderr) => {
+        exec(`alpr ${country_code} ${pattern_code} -j ${filepath}`, async (error, stdout, stderr) => {
             if (error) {
                 reject(error)
             }
@@ -34,7 +56,7 @@ export async function getPlate(imagedata:string, country_code:string, pattern_co
             catch (err) {
                 reject(err)
             }
-            resolve(result.results[0].plate)  
+            resolve(result.results[0] == null? '' : result.results[0].plate)   
         })
     })
 }

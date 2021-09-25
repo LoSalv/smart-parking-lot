@@ -1,9 +1,10 @@
 const mqtt = require('mqtt');
-const uuid = require("uuid");
 const dateHandler = require('date-and-time');
 const fs = require('fs');
+
 const TOTAL_PARKLOTS = 40;
-const PLATES = 12;
+const PLATES = 7;
+
  
 const settings = {
 	port: 1883
@@ -78,7 +79,7 @@ function publishGate(currDate, licensePlate) {
 
 	client.publish('gate', JSON.stringify({
 		datetime: dateHandler.format(date, 'DD/MM/YYYY HH:mm'),
-		plate: fs.readFileSync('./plates/'+imageName).toString('base64'),
+		plate: fs.readFileSync('./src/test/plates/'+imageName).toString('base64'),
 		fileName: imageName
 	}));
 }

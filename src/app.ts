@@ -1,6 +1,6 @@
 import httpServer from './servers/http'
 import * as db from './db/db'
-import * as mqttServer from './servers/mqtt'
+import mqttServer from './servers/mqtt'
 require('source-map-support').install();
 
 const PORT = process.env.PORT || 8124
