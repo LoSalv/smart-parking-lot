@@ -66,13 +66,4 @@ router.route('/multiple/:fromWhen/:plate').get(async (req, res, next) => {
     }
 })
 
-// router.route('/history').get(async (req, res, next) => {
-//     try {
-//         let result = await db.getAffluence()
-//         res.send(JSON.stringify(result))
-//     } catch (err) {
-//         res.status(500).send()
-//     }
-// })
-
 export default router 

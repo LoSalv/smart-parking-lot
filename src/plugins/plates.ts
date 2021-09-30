@@ -5,9 +5,6 @@ const util = require('util')
 
 const exec = util.promisify(require('child_process').exec)
 
-// const exec = require('child_process').exec
-
-// callback(plate, error)
 export async function getPlate(imagedata:string, country_code:string, pattern_code:string) : Promise<string> {
     if (!imagedata || !validator.isBase64(imagedata)) {
         throw 'No image to analyze'
@@ -22,20 +19,6 @@ export async function getPlate(imagedata:string, country_code:string, pattern_co
     }  
 
     await fsPromises.writeFile(filepath, bufferImg)
-
-    // return new Promise(async (resolve, reject) => {
-    //     try {
-    //         const {stdout, stderr} = await exec(`alpr -c 'eu'${pattern_code} -j ${filepath}`)
-    //         console.log(stdout)
-    //         if (stdout.results === []) {
-    //             reject('No plates.')
-    //         }
-    //         console.log('plate: ', stdout.results[0].plate)
-    //         resolve(stdout.results[0].plate)
-    //     } catch(e) {
-    //         reject(e)
-    //     }
-    // })
 
     return new Promise((resolve, reject) => {
         exec(`alpr -c 'eu' ${pattern_code} -j ${filepath}`, async (error, stdout, stderr) => {

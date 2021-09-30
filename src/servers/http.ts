@@ -6,9 +6,6 @@ import * as cors from 'cors'
 const app = express();
 app.use(cors())
 
-// Add the bodyParser to the chain
-// As the bodyParse middleware get information from
-// the request useful for other middleware make sure you add it first
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({
     extended: true

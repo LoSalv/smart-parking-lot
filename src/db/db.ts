@@ -2,7 +2,6 @@ import LogEntry from '../models/LogEntry'
 import ParkStatus from '../models/ParkStatus'
 import * as mongoose from 'mongoose'
 import * as dateHandler from 'date-and-time'
-import { endianness } from 'os'
 
 const MONGODB_PORT: string = process.env.MONGODB_PORT || '27017'
 const MONGODB_HOST: string = `mongodb://mongo:${MONGODB_PORT}`
@@ -75,16 +74,6 @@ export function getGateLog(fromHowManyDaysAgo?: number, plate?: string): Promise
         return getLogEntriesFilteredByPlate(plate)
     }
 }
-
-// export function getAffluence(): Promise<any> {
-//     return new Promise(async function (resolve, reject) {
-//         let startDate = dateHandler.addDays(new Date(), -14)
-//         let endDate = Date() 
-//         let lastTwoWeeksEntries = await getLogEntriesInAInterval(startDate, endDate)
-        
-
-//     })
-// }
 
 function getLogEntriesInAInterval(startDate, endDate): Promise<any> {
     return LogEntry.find({datetime:{$gte:startDate,$lt:endDate}})

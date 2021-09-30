@@ -2,8 +2,7 @@ import * as mongoose from 'mongoose'
 
 const parkStatusSchema = new mongoose.Schema({
     _id: Number,
-    free: Boolean,
-    numberOfFree: Number, 
+    free: Boolean
 });
 
 const ParkStatus = mongoose.model('ParkStatus', parkStatusSchema);
