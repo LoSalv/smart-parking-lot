@@ -3,4 +3,4 @@ The goal of the project is to define requirements, architecture and  prototype o
 
 Application repository: [here](https://github.com/LoSalv/smart-parking-lot-app)  
 Presentation slides: [here](https://docs.google.com/presentation/d/1Kmx7M1nnTLRrczQJf2cGlS2Vs7mEoOezwetoEjIEfo8/edit?usp=sharing)  
-Presentation video: [here]()  
+Presentation video: [here](https://youtu.be/K0vGROiE7TM)  
