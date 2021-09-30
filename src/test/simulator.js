@@ -5,7 +5,14 @@ const fs = require('fs');
 const TOTAL_PARKLOTS = 40;
 const PLATES = 7;
 
- 
+//enum 
+const Direction = {
+	'LEAVING': 'leaving',
+	'ENTERING': 'entering'
+}
+
+Object.freeze(Direction)
+
 const settings = {
 	port: 1883
 };
@@ -43,7 +50,7 @@ function gate() {
 
 				cars.push({ plate: plate, parkLot })
 
-				publishGate(date, plate);
+				publishGate(date, plate, Direction.ENTERING);
 				setTimeout(() => publishParkLot(parkLot, false), 300);
 			}
 		}
@@ -56,7 +63,7 @@ function gate() {
 			availableLots[exitedCar.parkLot] = true;
 			cars.splice(exitedCarIndex, 1);
 
-			publishGate(date, exitedCar.plate);
+			publishGate(date, exitedCar.plate, Direction.LEAVING);
 			publishParkLot(exitedCar.plate, true);
 		}
 	}
@@ -66,21 +73,23 @@ function simulateGateAndParkLots() {
 	const minutes = 60; //ms
 
 	date = dateHandler.addDays(new Date(), -14)
-	console.log("Simulating data from ", dateHandler.format(date, 'DD/MM/YYYY HH:mm'))
+	console.log("Simulating data from ", dateHandler.format(date, 'YYYY/MM/DD HH:mm'))
 
 	setInterval(() => date = dateHandler.addMinutes(date, 1), minutes);
 	// every ten minutes a car enter or exit
 	setInterval(gate, 600);
 }
 
-function publishGate(currDate, licensePlate) {
+function publishGate(currDate, licensePlate, direction) {
 	const imageName = `plate${licensePlate}.jpg`
-	console.log('Publishing GATE: ', dateHandler.format(currDate, 'DD/MM/YYYY HH:mm'), ', plate: ', imageName);
+	console.log('Publishing GATE: ', dateHandler.format(currDate, 'YYYY/MM/DD HH:mm'), 
+	', plate: ', imageName, ', ', direction);
 
 	client.publish('gate', JSON.stringify({
-		datetime: dateHandler.format(date, 'DD/MM/YYYY HH:mm'),
+		datetime: dateHandler.format(currDate, 'YYYY/MM/DD HH:mm'),
 		plate: fs.readFileSync('./src/test/plates/'+imageName).toString('base64'),
-		fileName: imageName
+		fileName: imageName,
+		direction: direction
 	}));
 }
 function publishParkLot(parkLot, isFree) {
@@ -91,5 +100,6 @@ function publishParkLot(parkLot, isFree) {
 	}));
 }
 
-
 simulateGateAndParkLots();
+
+//module.exports = publishGate

@@ -5,8 +5,13 @@ IMAGE_NAME = $(USERNAME)/$(PROJECT_NAME)
 build:
 		docker build -t $(IMAGE_NAME) .
 
-reload: 
+reloadv: 
 		docker compose down -v
+		npm run build
+		docker compose up
+
+reload: 
+		docker compose down
 		npm run build
 		docker compose up
 

@@ -38,7 +38,7 @@ export async function getPlate(imagedata:string, country_code:string, pattern_co
     // })
 
     return new Promise((resolve, reject) => {
-        exec(`alpr ${country_code} ${pattern_code} -j ${filepath}`, async (error, stdout, stderr) => {
+        exec(`alpr -c 'eu' ${pattern_code} -j ${filepath}`, async (error, stdout, stderr) => {
             if (error) {
                 reject(error)
             }
@@ -48,8 +48,7 @@ export async function getPlate(imagedata:string, country_code:string, pattern_co
             if (result.results.length < 1) {
                 reject ("No plates found in image") 
             }
-    
-            console.log(result)
+            
             try {
                 await fsPromises.unlink(filepath)
             }

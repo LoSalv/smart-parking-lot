@@ -5,6 +5,7 @@
   "main": "app.js",
   "dependencies": {
     "@types/cors": "^2.8.12",
+    "@types/date-and-time": "^0.13.0",
     "aedes": "0.46.1",
     "cors": "^2.8.5",
     "date-and-time": "^2.0.0",
